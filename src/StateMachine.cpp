@@ -38,7 +38,7 @@ void StateMachine::update()
             if (usbpd.existPPS)
                 transitionTo(State::NORMAL_PPS);
             else
-                transitionTo(State::NORMAL_PDO);
+                transitionTo(State::MENU); // changed from NORMAL_PDO to MENU
         break;
 
     case State::NORMAL_PPS:
@@ -68,6 +68,12 @@ void StateMachine::update()
         break;
 
     case State::MENU:
+        // Changed to turn off the output if it is currently on
+        if (digitalRead(pin_output_Enable) == HIGH) 
+        {
+            digitalWrite(pin_output_Enable, LOW); // Turn the output off
+        }
+        
         handleMenuState();
 
         button_encoder.isButtonPressed();
@@ -79,9 +85,8 @@ void StateMachine::update()
             button_selectVI.clearLongPressedFlag();
             transitionTo(State::NORMAL_PPS);
         }
-        if (button_encoder.longPressedFlag) // Long press
+        if (button_encoder.isButtonPressed()) // changed from long to short press
         {
-            button_encoder.clearLongPressedFlag();
             if (menu.menuPosition == usbpd.getPPSIndex())
                 transitionTo(State::NORMAL_PPS);
             else
@@ -374,8 +379,9 @@ void StateMachine::handleNormalPDOState()
         timerFlag0 = false;
     }
 
-    if (button_output.isButtonPressed() == 1)
+    if (button_output.longPressedFlag) // changed from short to long press
     {
+        button_output.clearLongPressedFlag();
         digitalWrite(pin_output_Enable, !digitalRead(pin_output_Enable));
     }
 
