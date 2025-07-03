@@ -85,7 +85,7 @@ void StateMachine::update()
             button_selectVI.clearLongPressedFlag();
             transitionTo(State::NORMAL_PPS);
         }
-        if (button_encoder.isButtonPressed()) // changed from long to short press
+        if (button_encoder.isButtonPressed() == 1) // changed from long to short press
         {
             if (menu.menuPosition == usbpd.getPPSIndex())
                 transitionTo(State::NORMAL_PPS);
