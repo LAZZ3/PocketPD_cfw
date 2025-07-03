@@ -1,7 +1,6 @@
 ## Description
-PocketPD is a portable USB-C bench power supply that can fit in your pocket. Combine with a USB-C PD 3.0/3.1 power source and you can ultilize the PPS profile to create a portable power supply with voltage and current adjustment.
-
-As the DIY community has grown, there are multiple ways to implement control features like adjusting parameters via Wifi, Bluetooth, or touch screen. We want to keep the design language simple, just physical knobs and buttons to control. This will give the system higher reliability when you need it to work.
+This is a fork of the [PocketPD](https://github.com/CentyLab/PocketPD) from CentyLab.
+The goal of this fork is to trail minor usability and saftey improvents in the state machine.
 
 ## Links
 * [PocketPD Hackaday's Project](https://hackaday.io/project/194295-pocketpd-usb-c-portable-bench-power-supply)
@@ -17,7 +16,7 @@ flowchart LR
     B --> |Short Press any button|D
     C --> |Short Press any button|D
     E --> |Long Press V/I|D
-    E --> |Long Press Encoder|D
+    E --> |Short Press Encoder|D
 ```
 
 ## Operational manual
@@ -48,7 +47,7 @@ In NORMAL state:
 
 In MENU state:
 + Turning the encoder to select profile
-+ Long press encoder to activate profile
++ Short press encoder to activate profile
 + Long press Volt/Amp button to return to normal operation and cancel profile change
 
 <p align="center" width="100%">
@@ -62,7 +61,7 @@ Example when select 5V @ 3A profile
 </p>
 <br>
 
-**Note**: If your charger doesn't support PPS profile, PocketPD will directly boot into the first 5V PDO profile. Your menu will looks like this:
+**Note**: If your charger doesn't support PPS profile, PocketPD will directly boot into the Menu state. Once you select a PDO voltage your menu will looks like this:
 
 <p align="center" width="100%">
     <img width="40%" src="media/pdoprofile.jpg">
