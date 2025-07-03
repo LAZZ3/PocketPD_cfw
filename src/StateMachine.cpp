@@ -76,7 +76,6 @@ void StateMachine::update()
         
         handleMenuState();
 
-        button_encoder.isButtonPressed();
         button_output.isButtonPressed();
         button_selectVI.isButtonPressed();
 
@@ -379,9 +378,8 @@ void StateMachine::handleNormalPDOState()
         timerFlag0 = false;
     }
 
-    if (button_output.longPressedFlag) // changed from short to long press
+    if (button_output.isButtonPressed() == 1)
     {
-        button_output.clearLongPressedFlag();
         digitalWrite(pin_output_Enable, !digitalRead(pin_output_Enable));
     }
 
