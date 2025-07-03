@@ -27,7 +27,7 @@ void StateMachine::update()
             if (usbpd.existPPS)
                 transitionTo(State::NORMAL_PPS);
             else
-                transitionTo(State::NORMAL_PDO);
+                transitionTo(State::MENU); // changed from NORMAL_PDO to MENU
         else if (elapsed >= OBTAIN_TO_CAPDISPLAY_TIMEOUT)
             transitionTo(State::CAPDISPLAY);
         break;
