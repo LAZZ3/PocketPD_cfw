@@ -2,6 +2,12 @@
 This is a fork of the [PocketPD](https://github.com/CentyLab/PocketPD) from CentyLab.
 The goal of this fork is to trail minor usability and saftey improvents in the state machine.
 
+Changes include:
++ If no PPS support, then transition from CAPDISPLAY to MENU to allow immediate PDO voltage selection
++ If transitioning to MENU then turn off output to improve safety 
++ If in MENU, then a short encoder press will transition states to improve usebility 
++ If output is off, then only long output button press will turn it on to improve safety (currently only in PDO state)
+
 ## Links
 * [PocketPD Hackaday's Project](https://hackaday.io/project/194295-pocketpd-usb-c-portable-bench-power-supply)
 
