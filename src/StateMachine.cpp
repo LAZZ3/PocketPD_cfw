@@ -23,7 +23,9 @@ void StateMachine::update()
 
     case State::OBTAIN:
         handleObtainState();
-        if (button_encoder.isButtonPressed() | button_output.isButtonPressed() | button_selectVI.isButtonPressed()) // Short press
+        if (encoder.getDirection() != RotaryEncoder::Direction::NOROTATION){ // changed to MENU transistion upon encoder rotation
+            transitionTo(State::MENU);
+        } else if (button_encoder.isButtonPressed() | button_output.isButtonPressed() | button_selectVI.isButtonPressed()) // Short press
             if (usbpd.existPPS)
                 transitionTo(State::NORMAL_PPS);
             else
@@ -34,7 +36,9 @@ void StateMachine::update()
 
     case State::CAPDISPLAY:
         handleDisplayCapState();
-        if ((button_encoder.isButtonPressed() | button_output.isButtonPressed() | button_selectVI.isButtonPressed() | elapsed >= DISPLAYCCAP_TO_NORMAL_TIMEOUT)) // Short press + timeout
+        if (encoder.getDirection() != RotaryEncoder::Direction::NOROTATION){ // changed to MENU transistion upon encoder rotation
+            transitionTo(State::MENU);
+        } else if ((button_encoder.isButtonPressed() | button_output.isButtonPressed() | button_selectVI.isButtonPressed() | elapsed >= DISPLAYCCAP_TO_NORMAL_TIMEOUT)) // Short press + timeout
             if (usbpd.existPPS)
                 transitionTo(State::NORMAL_PPS);
             else

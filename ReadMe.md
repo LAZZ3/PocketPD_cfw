@@ -5,12 +5,16 @@ The goal of this fork is to trail minor usability and saftey improvents in the s
 Changes include:
 + If no PPS support, then transition from CAPDISPLAY to MENU to allow immediate PDO voltage selection
 + If transitioning to MENU then turn off output to improve safety 
-+ If in MENU, then a short encoder press will transition states to improve usebility 
++ If in MENU, then a short encoder press will transition states to improve usability 
++ If in BOOT or CAPDISPLAY, encoder rotation will transition states to MENU
++ Long press duration has been reduced to 1.5 seconds
++ '*' has been added to version number to indicate non-official release
+
 
 ## Links
 * [PocketPD Hackaday's Project](https://hackaday.io/project/194295-pocketpd-usb-c-portable-bench-power-supply)
 
-## System flow chart
+## System flow chart (not up-to-date)
 
 ```mermaid
 flowchart LR
